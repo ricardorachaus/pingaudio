@@ -1,0 +1,457 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		368733A11EDF565A00533F82 /* Pingaudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368733971EDF565A00533F82 /* Pingaudio.framework */; };
+		368733A61EDF565A00533F82 /* PingaudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733A51EDF565A00533F82 /* PingaudioTests.swift */; };
+		368733A81EDF565A00533F82 /* Pingaudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 3687339A1EDF565A00533F82 /* Pingaudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		368733B61EDF614500533F82 /* PAAudioDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733B51EDF614500533F82 /* PAAudioDataSource.swift */; };
+		368733B81EDF617400533F82 /* PAAudioDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733B71EDF617400533F82 /* PAAudioDelegate.swift */; };
+		368733BA1EDF619100533F82 /* PAAudioManagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733B91EDF619100533F82 /* PAAudioManagerDataSource.swift */; };
+		368733BC1EDF61AC00533F82 /* PAAudioManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733BB1EDF61AC00533F82 /* PAAudioManagerDelegate.swift */; };
+		368733BE1EDF61D000533F82 /* PAAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733BD1EDF61D000533F82 /* PAAudio.swift */; };
+		368733C01EDF622200533F82 /* PAAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368733BF1EDF622200533F82 /* PAAudioManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		368733A21EDF565A00533F82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3687338E1EDF565A00533F82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 368733961EDF565A00533F82;
+			remoteInfo = Pingaudio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		368733971EDF565A00533F82 /* Pingaudio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pingaudio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3687339A1EDF565A00533F82 /* Pingaudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pingaudio.h; sourceTree = "<group>"; };
+		3687339B1EDF565A00533F82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		368733A01EDF565A00533F82 /* PingaudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PingaudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		368733A51EDF565A00533F82 /* PingaudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingaudioTests.swift; sourceTree = "<group>"; };
+		368733A71EDF565A00533F82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		368733B51EDF614500533F82 /* PAAudioDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAudioDataSource.swift; sourceTree = "<group>"; };
+		368733B71EDF617400533F82 /* PAAudioDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAudioDelegate.swift; sourceTree = "<group>"; };
+		368733B91EDF619100533F82 /* PAAudioManagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAudioManagerDataSource.swift; sourceTree = "<group>"; };
+		368733BB1EDF61AC00533F82 /* PAAudioManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAudioManagerDelegate.swift; sourceTree = "<group>"; };
+		368733BD1EDF61D000533F82 /* PAAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAudio.swift; sourceTree = "<group>"; };
+		368733BF1EDF622200533F82 /* PAAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAudioManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		368733931EDF565A00533F82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3687339D1EDF565A00533F82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				368733A11EDF565A00533F82 /* Pingaudio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3687338D1EDF565A00533F82 = {
+			isa = PBXGroup;
+			children = (
+				368733991EDF565A00533F82 /* Pingaudio */,
+				368733A41EDF565A00533F82 /* PingaudioTests */,
+				368733981EDF565A00533F82 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		368733981EDF565A00533F82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				368733971EDF565A00533F82 /* Pingaudio.framework */,
+				368733A01EDF565A00533F82 /* PingaudioTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		368733991EDF565A00533F82 /* Pingaudio */ = {
+			isa = PBXGroup;
+			children = (
+				368733B41EDF612800533F82 /* Classes */,
+				368733B31EDF612200533F82 /* Protocols */,
+				3687339A1EDF565A00533F82 /* Pingaudio.h */,
+				3687339B1EDF565A00533F82 /* Info.plist */,
+			);
+			path = Pingaudio;
+			sourceTree = "<group>";
+		};
+		368733A41EDF565A00533F82 /* PingaudioTests */ = {
+			isa = PBXGroup;
+			children = (
+				368733A51EDF565A00533F82 /* PingaudioTests.swift */,
+				368733A71EDF565A00533F82 /* Info.plist */,
+			);
+			path = PingaudioTests;
+			sourceTree = "<group>";
+		};
+		368733B31EDF612200533F82 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				368733B51EDF614500533F82 /* PAAudioDataSource.swift */,
+				368733B71EDF617400533F82 /* PAAudioDelegate.swift */,
+				368733B91EDF619100533F82 /* PAAudioManagerDataSource.swift */,
+				368733BB1EDF61AC00533F82 /* PAAudioManagerDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		368733B41EDF612800533F82 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				368733BD1EDF61D000533F82 /* PAAudio.swift */,
+				368733BF1EDF622200533F82 /* PAAudioManager.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		368733941EDF565A00533F82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				368733A81EDF565A00533F82 /* Pingaudio.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		368733961EDF565A00533F82 /* Pingaudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 368733AB1EDF565A00533F82 /* Build configuration list for PBXNativeTarget "Pingaudio" */;
+			buildPhases = (
+				368733921EDF565A00533F82 /* Sources */,
+				368733931EDF565A00533F82 /* Frameworks */,
+				368733941EDF565A00533F82 /* Headers */,
+				368733951EDF565A00533F82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pingaudio;
+			productName = Pingaudio;
+			productReference = 368733971EDF565A00533F82 /* Pingaudio.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3687339F1EDF565A00533F82 /* PingaudioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 368733AE1EDF565A00533F82 /* Build configuration list for PBXNativeTarget "PingaudioTests" */;
+			buildPhases = (
+				3687339C1EDF565A00533F82 /* Sources */,
+				3687339D1EDF565A00533F82 /* Frameworks */,
+				3687339E1EDF565A00533F82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				368733A31EDF565A00533F82 /* PBXTargetDependency */,
+			);
+			name = PingaudioTests;
+			productName = PingaudioTests;
+			productReference = 368733A01EDF565A00533F82 /* PingaudioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3687338E1EDF565A00533F82 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Rachaus;
+				TargetAttributes = {
+					368733961EDF565A00533F82 = {
+						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					3687339F1EDF565A00533F82 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 368733911EDF565A00533F82 /* Build configuration list for PBXProject "Pingaudio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3687338D1EDF565A00533F82;
+			productRefGroup = 368733981EDF565A00533F82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				368733961EDF565A00533F82 /* Pingaudio */,
+				3687339F1EDF565A00533F82 /* PingaudioTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		368733951EDF565A00533F82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3687339E1EDF565A00533F82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		368733921EDF565A00533F82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				368733BE1EDF61D000533F82 /* PAAudio.swift in Sources */,
+				368733BC1EDF61AC00533F82 /* PAAudioManagerDelegate.swift in Sources */,
+				368733B81EDF617400533F82 /* PAAudioDelegate.swift in Sources */,
+				368733C01EDF622200533F82 /* PAAudioManager.swift in Sources */,
+				368733BA1EDF619100533F82 /* PAAudioManagerDataSource.swift in Sources */,
+				368733B61EDF614500533F82 /* PAAudioDataSource.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3687339C1EDF565A00533F82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				368733A61EDF565A00533F82 /* PingaudioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		368733A31EDF565A00533F82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 368733961EDF565A00533F82 /* Pingaudio */;
+			targetProxy = 368733A21EDF565A00533F82 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		368733A91EDF565A00533F82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		368733AA1EDF565A00533F82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		368733AC1EDF565A00533F82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Pingaudio/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rachaus.Pingaudio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		368733AD1EDF565A00533F82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Pingaudio/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rachaus.Pingaudio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		368733AF1EDF565A00533F82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = PingaudioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rachaus.PingaudioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		368733B01EDF565A00533F82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = PingaudioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rachaus.PingaudioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		368733911EDF565A00533F82 /* Build configuration list for PBXProject "Pingaudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368733A91EDF565A00533F82 /* Debug */,
+				368733AA1EDF565A00533F82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		368733AB1EDF565A00533F82 /* Build configuration list for PBXNativeTarget "Pingaudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368733AC1EDF565A00533F82 /* Debug */,
+				368733AD1EDF565A00533F82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		368733AE1EDF565A00533F82 /* Build configuration list for PBXNativeTarget "PingaudioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368733AF1EDF565A00533F82 /* Debug */,
+				368733B01EDF565A00533F82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3687338E1EDF565A00533F82 /* Project object */;
+}
