@@ -9,5 +9,6 @@
 import AVFoundation
 
 protocol PAAudioDataSource {
-    
+    var path: URL {get set}
+    var duration: CMTime {get set}
 }
