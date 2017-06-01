@@ -9,5 +9,6 @@
 import AVFoundation
 
 protocol PAAudioManagerDelegate {
-    
+    func merge(audios: [PAAudio], outputPath: URL) -> PAAudio
+    func export(composition: AVMutableComposition, to outputPath: URL)
 }
