@@ -9,7 +9,7 @@
 import AVFoundation
 
 protocol PAAudioDelegate {
-    func append(audio path: URL) -> Bool
+    func append(audio path: URL)
     func insert(at: CMTime) -> Bool
     func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio
     func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio
