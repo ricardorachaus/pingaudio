@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-protocol PAAudioManagerDataSource {
+protocol PAExporterDataSource {
     var resultAudio: PAAudio? { get set }
     var didExport: Bool { get set }
 }
