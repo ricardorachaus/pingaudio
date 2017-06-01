@@ -9,7 +9,21 @@
 import AVFoundation
 
 public class PAAudioManager: PAAudioManagerDelegate {
+    var resultAudio: PAAudio? {
+        get {
+            if exporter.didExport {
+                return exporter.resultAudio
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    var exporter: PAExporter!
     
+    init() {
+        exporter = PAExporter()
+    }
     
     public func merge(audios: [PAAudio], outputPath: URL) {
         let composition = AVMutableComposition()
@@ -20,7 +34,8 @@ public class PAAudioManager: PAAudioManagerDelegate {
             PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: time)
             time = CMTimeAdd(time, asset.duration)
         }
-        export(composition: composition, to: outputPath)
+        exporter.export(composition: composition, to: outputPath)
+        
     }
     
     static func add(asset: AVAsset, ofType type:String, to composition: AVMutableComposition, at time: CMTime) {
@@ -32,4 +47,5 @@ public class PAAudioManager: PAAudioManagerDelegate {
             print("falha ao adicionar track a composition")
         }
     }
+    
 }

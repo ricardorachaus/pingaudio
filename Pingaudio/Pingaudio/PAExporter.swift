@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rachaus. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 
 class PAExporter: PAExporterDataSource, PAExporterDelegate {
     var resultAudio: PAAudio? {
@@ -23,11 +23,15 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
         }
     }
     
-    var didExport: Bool
+    var didExport: Bool {
+        get {
+            return resultAudio != nil
+        }
+    }
+    
     var exportStatus: String
     
     public init() {
-        didExport = false
         exportStatus = ""
     }
     
