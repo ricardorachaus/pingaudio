@@ -10,7 +10,7 @@ import AVFoundation
 
 public class PAAudio: PAAudioDataSource, PAAudioDelegate {
     var delegate: PAAudioDelegate?
-    var path: URL
+    public var path: URL
     var duration: CMTime
     fileprivate var asset: AVAsset?
     fileprivate var exporter: PAExporter?
@@ -18,7 +18,7 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         get {
             let resultAudio = exporter?.resultAudio
             if (exporter?.didExport)! {
-                path = (resultAudio?.path)!
+                self.path = (resultAudio?.path)!
                 self.asset = AVAsset(url: self.path)
                 self.duration = (asset?.duration)!
                 return resultAudio
@@ -35,12 +35,24 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         exporter = PAExporter()
     }
     
-    func append(audio path: URL) {
-        let composition = AVMutableComposition()
-        let asset = AVAsset(url: path)
-        PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: self.duration)
-        exporter?.export(composition: composition, to: self.path)
+    public func append(audio path: URL) {
+        let audioManager = PAAudioManager()
+        let outputPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/hue.m4a")
+        let outputPathUrl = URL(string: outputPath!)
         
+        audioManager.merge(audios: [self, PAAudio(path: path)], outputPath: outputPathUrl!)
+        self.path = outputPathUrl!
+//        setAudio()
+    }
+    
+    func setAudio() {
+        let result = exporter?.resultAudio?.path
+        var count = 0
+        while result == nil {
+            print("hue \(count)")
+            count += 1
+        }
+        path = (exporter?.resultAudio?.path)!
     }
     
     func insert(at: CMTime) -> Bool {

@@ -47,5 +47,5 @@ public class PAAudioManager: PAAudioManagerDelegate {
             print("falha ao adicionar track a composition")
         }
     }
-    
+
 }

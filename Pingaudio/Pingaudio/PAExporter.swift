@@ -9,20 +9,20 @@
 import AVFoundation
 
 class PAExporter: PAExporterDataSource, PAExporterDelegate {
-    var resultAudio: PAAudio? {
-        get {
-            if didExport {
-                return self.resultAudio
-            }
-            else {
-                return nil
-            }
-        }
-        set (audio) {
-            self.resultAudio = audio
-        }
-    }
-    
+    var resultAudio: PAAudio?
+//    {
+//        get {
+//            if didExport {
+////                return PAAudio()
+//            }
+//            else {
+//                return nil
+//            }
+//        }
+//        set (audio) {
+//            let newAudio = PAAudio.
+//        }
+//    }
     var didExport: Bool {
         get {
             return resultAudio != nil
@@ -37,13 +37,15 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
     
     func export(composition: AVMutableComposition, to outputPath: URL) {
         guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return }
-        exporter.outputURL = outputPath
+        exporter.outputURL = NSURL.fileURL(withPath: outputPath.absoluteString)
         exporter.outputFileType = AVFileTypeAppleM4A
         exporter.shouldOptimizeForNetworkUse = true
-        
         exporter.exportAsynchronously() {
-            self.resultAudio = PAAudio(path: outputPath)
+                print(exporter.error?.localizedDescription)
+//            resultAudio = PAAudio(path: outputPath)
         }
+        
+//        self.resultAudio = resultAudio
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatus(_:)), userInfo: exporter, repeats: true)
     }
     
@@ -74,5 +76,6 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
             timer.invalidate()
         }
         exportStatus = statusMessage
+        print(statusMessage)
     }
 }
