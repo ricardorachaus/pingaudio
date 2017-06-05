@@ -55,19 +55,27 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         path = (exporter?.resultAudio?.path)!
     }
     
-    func insert(at: CMTime) -> Bool {
+    public func insert(at: CMTime) -> Bool {
         return true
     }
     
-    func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio {
+    public func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio {
+        let exportTimeRange = CMTimeRange(start: begin, end: end)
+        let composition = AVMutableComposition(url: path)
+        let exporter = PAExporter()
+        let newPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/qotsa.m4a")
+        let outputURL = URL(string: newPath!)
+        
+        exporter.export(composition: composition, to: outputURL!, in: exportTimeRange)
+        
         return PAAudio(path: path)
     }
     
-    func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio {
+    public func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio {
         return PAAudio(path: path)
     }
     
-    func split(intervalsOfDuration duration: CMTime) -> [PAAudio] {
+    public func split(intervalsOfDuration duration: CMTime) -> [PAAudio] {
         return [PAAudio(path: path)]
     }
     
