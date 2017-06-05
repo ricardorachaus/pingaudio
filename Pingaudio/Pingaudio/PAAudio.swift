@@ -28,6 +28,10 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         }
     }
     
+    /**
+     Default initializer
+     - Parameter path: path to some audio file
+     */
     public init(path: URL) {
         self.path = path
         asset = AVAsset(url: self.path)
@@ -35,14 +39,45 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         exporter = PAExporter()
     }
     
+    /**
+        Move item in `tempPath` to current audio path.
+        - Parameter tempPath: item to be moved.
+     
+     */
+    func moveToDocuments(tempPath: URL) {
+        let fileManager = FileManager()
+        let savePath = self.path
+        if fileManager.fileExists(atPath: tempPath.path) && fileManager.fileExists(atPath: savePath.path) {
+            // first delete previous audio in current path
+            do {
+                try fileManager.removeItem(at: savePath)
+            } catch let error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            // now move the new audio to the PAAudio path
+            do {
+                try fileManager.moveItem(at: tempPath, to: savePath)
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    /**
+     Append audio file in `path` at the end of current audio, making a new audio from it
+     - Parameter path: path to some audio file
+     */
     public func append(audio path: URL) {
         let audioManager = PAAudioManager()
-        let outputPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/hue.m4a")
-        let outputPathUrl = URL(string: outputPath!)
         
-        audioManager.merge(audios: [self, PAAudio(path: path)], outputPath: outputPathUrl!)
-        self.path = outputPathUrl!
-//        setAudio()
+        let outputPath = audioManager.merge(audios: [self, PAAudio(path: path)])
+        if let tempPath = outputPath {
+            moveToDocuments(tempPath: tempPath)
+        } else {
+            print("Failed to append file. AVAssetExportSession is nil")
+        }
     }
     
     func setAudio() {
@@ -75,7 +110,13 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         return PAAudio(path: path)
     }
     
+
     public func split(intervalsOfDuration duration: CMTime) -> [PAAudio] {
+        if self.duration <= duration {
+            return [self]
+        } else {
+            
+        }
         return [PAAudio(path: path)]
     }
     
