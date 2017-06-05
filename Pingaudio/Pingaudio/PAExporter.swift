@@ -26,7 +26,7 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
         let fileManager = FileManager()
         let outputPath = fileManager.temporaryDirectory.appendingPathComponent("\(Date().timeIntervalSince1970).m4a")
         guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return nil}
-        exporter.outputURL = NSURL.fileURL(withPath: outputPath.absoluteString)
+        exporter.outputURL = outputPath
         exporter.outputFileType = AVFileTypeAppleM4A
         exporter.shouldOptimizeForNetworkUse = true
         exporter.exportAsynchronously() {
