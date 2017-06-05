@@ -35,10 +35,9 @@ public class PAAudioManager: PAAudioManagerDelegate {
             time = CMTimeAdd(time, asset.duration)
         }
         return exporter.export(composition: composition)
-        
     }
     
-    static func add(asset: AVAsset, ofType type:String, to composition: AVMutableComposition, at time: CMTime) {
+    static func add(asset: AVAsset, ofType type: String, to composition: AVMutableComposition, at time: CMTime) {
         let track = composition.addMutableTrack(withMediaType: type, preferredTrackID: kCMPersistentTrackID_Invalid)
         let assetTrack = asset.tracks(withMediaType: type).first!
         do {

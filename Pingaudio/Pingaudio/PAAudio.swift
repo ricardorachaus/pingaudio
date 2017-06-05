@@ -95,6 +95,29 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
     }
     
     public func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio? {
+        let exporter = PAExporter()
+                let asset = AVAsset(url: path)
+        let composition = AVMutableComposition()
+        PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: kCMTimeZero)
+        
+        let  firstTimeRange = CMTimeRange(start: kCMTimeZero, end: begin)
+        guard let firstPartResult = exporter.export(composition: composition, in: firstTimeRange) else { return nil }
+        
+        let secondTimeRange = CMTimeRange(start: end, end: asset.duration)
+        guard let secondPartResult = exporter.export(composition: composition, in: secondTimeRange) else { return nil }
+        
+        let audioManager = PAAudioManager()
+        let result = audioManager.merge(audios: [PAAudio(path: firstPartResult), PAAudio(path: secondPartResult)])
+        
+        if let resultPath = result {
+            return PAAudio(path: resultPath)
+        } else {
+            print("failed to remove interval")
+            return nil
+        }
+    }
+    
+    public func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio? {
         let exportTimeRange = CMTimeRange(start: begin, end: end)
         let composition = AVMutableComposition()
         PAAudioManager.add(asset: AVAsset(url: path), ofType: AVMediaTypeAudio, to: composition, at: kCMTimeZero)
@@ -104,13 +127,9 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         if let resultPath = result {
             return PAAudio(path: resultPath)
         } else {
-            print("failed to remove in interval")
+            print("failed to remove outside interval")
             return nil
         }
-    }
-    
-    public func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio {
-        return PAAudio(path: path)
     }
     
 
