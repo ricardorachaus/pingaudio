@@ -94,16 +94,19 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         return true
     }
     
-    public func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio {
+    public func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio? {
         let exportTimeRange = CMTimeRange(start: begin, end: end)
-        let composition = AVMutableComposition(url: path)
+        let composition = AVMutableComposition()
+        PAAudioManager.add(asset: AVAsset(url: path), ofType: AVMediaTypeAudio, to: composition, at: kCMTimeZero)
         let exporter = PAExporter()
-        let newPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/qotsa.m4a")
-        let outputURL = URL(string: newPath!)
+        let result = exporter.export(composition: composition, in: exportTimeRange)
         
-        exporter.export(composition: composition, to: outputURL!, in: exportTimeRange)
-        
-        return PAAudio(path: path)
+        if let resultPath = result {
+            return PAAudio(path: resultPath)
+        } else {
+            print("failed to remove in interval")
+            return nil
+        }
     }
     
     public func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio {

@@ -39,18 +39,26 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
         return outputPath
     }
     
-    func export(composition: AVMutableComposition, to outputPath: URL, in time: CMTimeRange) {
-        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return }
-        exporter.outputURL = NSURL.fileURL(withPath: outputPath.absoluteString)
+    func export(composition: AVMutableComposition, in time: CMTimeRange) -> URL? {
+        let fileManager = FileManager()
+        let outputPath = fileManager.temporaryDirectory.appendingPathComponent("\(Date().timeIntervalSince1970).m4a")
+        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else {
+            print("wtf")
+            return nil
+        }
+        exporter.outputURL = outputPath
         exporter.outputFileType = AVFileTypeAppleM4A
         exporter.shouldOptimizeForNetworkUse = true
         exporter.timeRange = time
         
         exporter.exportAsynchronously() {
-            print(exporter.error?.localizedDescription)
+            if let error = exporter.error {
+                print(error.localizedDescription)
+            }
         }
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatus(_:)), userInfo: exporter, repeats: true)
+        return outputPath
     }
     
     @objc func updateStatus(_ timer: Timer) {
