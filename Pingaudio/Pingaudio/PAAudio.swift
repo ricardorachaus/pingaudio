@@ -35,14 +35,42 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         exporter = PAExporter()
     }
     
+    /**
+        Move item in `tempPath` to current audio path.
+        - Parameter tempPath: item to be moved.
+     
+     */
+    
+    func moveToDocuments(tempPath: URL) {
+        let fileManager = FileManager()
+        let savePath = self.path
+        if fileManager.fileExists(atPath: tempPath.path) && fileManager.fileExists(atPath: savePath.path) {
+            // first delete previous audio in current path
+            do {
+                try fileManager.removeItem(at: savePath)
+            } catch let error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            // now move the new audio to the PAAudio path
+            do {
+                try fileManager.moveItem(at: tempPath, to: savePath)
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     public func append(audio path: URL) {
         let audioManager = PAAudioManager()
-        let outputPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/hue.m4a")
-        let outputPathUrl = URL(string: outputPath!)
         
-        audioManager.merge(audios: [self, PAAudio(path: path)], outputPath: outputPathUrl!)
-        self.path = outputPathUrl!
-//        setAudio()
+        let outputPath = audioManager.merge(audios: [self, PAAudio(path: path)])
+        if let tempPath = outputPath {
+            moveToDocuments(tempPath: tempPath)
+        } else {
+            print("Failed to append file. AVAssetExportSession is nil")
+        }
     }
     
     func setAudio() {

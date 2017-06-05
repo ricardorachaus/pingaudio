@@ -10,19 +10,6 @@ import AVFoundation
 
 class PAExporter: PAExporterDataSource, PAExporterDelegate {
     var resultAudio: PAAudio?
-//    {
-//        get {
-//            if didExport {
-////                return PAAudio()
-//            }
-//            else {
-//                return nil
-//            }
-//        }
-//        set (audio) {
-//            let newAudio = PAAudio.
-//        }
-//    }
     var didExport: Bool {
         get {
             return resultAudio != nil
@@ -35,18 +22,21 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
         exportStatus = ""
     }
     
-    func export(composition: AVMutableComposition, to outputPath: URL) {
-        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return }
+    func export(composition: AVMutableComposition) -> URL? {
+        let fileManager = FileManager()
+        let outputPath = fileManager.temporaryDirectory.appendingPathComponent("\(Date().timeIntervalSince1970).m4a")
+        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return nil}
         exporter.outputURL = NSURL.fileURL(withPath: outputPath.absoluteString)
         exporter.outputFileType = AVFileTypeAppleM4A
         exporter.shouldOptimizeForNetworkUse = true
         exporter.exportAsynchronously() {
-                print(exporter.error?.localizedDescription)
-//            resultAudio = PAAudio(path: outputPath)
+            if let error = exporter.error {
+                print(error.localizedDescription)
+            }
         }
         
-//        self.resultAudio = resultAudio
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatus(_:)), userInfo: exporter, repeats: true)
+        return outputPath
     }
     
     @objc func updateStatus(_ timer: Timer) {

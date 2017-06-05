@@ -25,7 +25,7 @@ public class PAAudioManager: PAAudioManagerDelegate {
         exporter = PAExporter()
     }
     
-    public func merge(audios: [PAAudio], outputPath: URL) {
+    public func merge(audios: [PAAudio]) -> URL? {
         let composition = AVMutableComposition()
         var time = kCMTimeZero
         
@@ -34,7 +34,7 @@ public class PAAudioManager: PAAudioManagerDelegate {
             PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: time)
             time = CMTimeAdd(time, asset.duration)
         }
-        exporter.export(composition: composition, to: outputPath)
+        return exporter.export(composition: composition)
         
     }
     
