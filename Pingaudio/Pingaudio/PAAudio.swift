@@ -28,6 +28,10 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         }
     }
     
+    /**
+     Default initializer
+     - Parameter path: path to some audio file
+     */
     public init(path: URL) {
         self.path = path
         asset = AVAsset(url: self.path)
@@ -40,7 +44,6 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         - Parameter tempPath: item to be moved.
      
      */
-    
     func moveToDocuments(tempPath: URL) {
         let fileManager = FileManager()
         let savePath = self.path
@@ -62,6 +65,10 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         }
     }
     
+    /**
+     Append audio file in `path` at the end of current audio, making a new audio from it
+     - Parameter path: path to some audio file
+     */
     public func append(audio path: URL) {
         let audioManager = PAAudioManager()
         
@@ -96,6 +103,11 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
     }
     
     func split(intervalsOfDuration duration: CMTime) -> [PAAudio] {
+        if self.duration <= duration {
+            return [self]
+        } else {
+            
+        }
         return [PAAudio(path: path)]
     }
     
