@@ -101,34 +101,58 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: kCMTimeZero)
         
         let  firstTimeRange = CMTimeRange(start: kCMTimeZero, end: begin)
-        guard let firstPartResult = exporter.export(composition: composition, in: firstTimeRange) else { return nil }
+        var firstResultPath: URL?
+        exporter.export(composition: composition, in: firstTimeRange) { (resultPath: URL?) -> Void in
+            if let result = resultPath {
+                firstResultPath = result
+            } else {
+                firstResultPath = nil
+                print("failed to export first part of audio")
+            }
+        }
         
         let secondTimeRange = CMTimeRange(start: end, end: asset.duration)
-        guard let secondPartResult = exporter.export(composition: composition, in: secondTimeRange) else { return nil }
+        var secondResultPath: URL?
+        exporter.export(composition: composition, in: secondTimeRange) { (output: URL?) -> Void in
+            if let result = output {
+                secondResultPath = result
+            } else {
+                secondResultPath = nil
+                print("failed to export second part of audio")
+            }
+        }
+        
+        guard let firstResult = firstResultPath, let secondResult = secondResultPath else {
+            print("failed to remove interval: E01")
+            return nil
+        }
+        
+        let firstAudio = PAAudio(path: firstResult)
+        let secondAudio = PAAudio(path: secondResult)
         
         let audioManager = PAAudioManager()
-        let result = audioManager.merge(audios: [PAAudio(path: firstPartResult), PAAudio(path: secondPartResult)])
+        let result = audioManager.merge(audios: [firstAudio, secondAudio])
         
         if let resultPath = result {
             return PAAudio(path: resultPath)
         } else {
-            print("failed to remove interval")
+            print("failed to remove interval: E02")
             return nil
         }
     }
     
-    public func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio? {
+    public func remove(outsideIntervalFrom begin: CMTime, to end: CMTime, completion: @escaping (_ output: PAAudio?) -> Void) {
         let exportTimeRange = CMTimeRange(start: begin, end: end)
         let composition = AVMutableComposition()
         PAAudioManager.add(asset: AVAsset(url: path), ofType: AVMediaTypeAudio, to: composition, at: kCMTimeZero)
         let exporter = PAExporter()
-        let result = exporter.export(composition: composition, in: exportTimeRange)
-        
-        if let resultPath = result {
-            return PAAudio(path: resultPath)
-        } else {
-            print("failed to remove outside interval")
-            return nil
+        exporter.export(composition: composition, in: exportTimeRange) { (output: URL?) -> Void in
+            if let resultPath = output {
+                completion(PAAudio(path: resultPath))
+            } else {
+                print("failed to export audio")
+                completion(nil)
+            }
         }
     }
     

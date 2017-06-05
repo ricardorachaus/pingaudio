@@ -12,6 +12,6 @@ protocol PAAudioDelegate {
     func append(audio path: URL)
     func insert(at: CMTime) -> Bool
     func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio?
-    func remove(outsideIntervalFrom begin: CMTime, to end: CMTime) -> PAAudio?
+    func remove(outsideIntervalFrom begin: CMTime, to end: CMTime, completion: @escaping(_ output: PAAudio?) -> Void)
     func split(intervalsOfDuration duration: CMTime) -> [PAAudio]
 }

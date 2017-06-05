@@ -34,17 +34,15 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
                 print(error.localizedDescription)
             }
         }
-        
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatus(_:)), userInfo: exporter, repeats: true)
         return outputPath
     }
     
-    func export(composition: AVMutableComposition, in time: CMTimeRange) -> URL? {
+    func export(composition: AVMutableComposition, in time: CMTimeRange, completion: @escaping (_ output: URL?) -> Void) {
         let fileManager = FileManager()
         let outputPath = fileManager.temporaryDirectory.appendingPathComponent("\(Date().timeIntervalSince1970).m4a")
         guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else {
             print("wtf")
-            return nil
+            return
         }
         exporter.outputURL = outputPath
         exporter.outputFileType = AVFileTypeAppleM4A
@@ -52,19 +50,19 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
         exporter.timeRange = time
         
         exporter.exportAsynchronously() {
+            self.updateStatus(exporterStatus: exporter.status)
             if let error = exporter.error {
                 print(error.localizedDescription)
+                completion(nil)
+            } else {
+                completion(outputPath)
             }
         }
-        
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatus(_:)), userInfo: exporter, repeats: true)
-        return outputPath
     }
     
-    @objc func updateStatus(_ timer: Timer) {
-        let exporter = timer.userInfo as! AVAssetExportSession
+    func updateStatus(exporterStatus: AVAssetExportSessionStatus) {
         var statusMessage: String!
-        switch exporter.status {
+        switch exporterStatus {
         case .waiting:
             statusMessage = "waiting"
             
@@ -73,19 +71,15 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
             
         case .cancelled:
             statusMessage = "cancelled"
-            timer.invalidate()
             
         case .completed:
             statusMessage = "completed"
-            timer.invalidate()
             
         case .failed:
             statusMessage = "failed"
-            timer.invalidate()
             
         case .unknown:
             statusMessage = "unknown"
-            timer.invalidate()
         }
         exportStatus = statusMessage
         print(statusMessage)
