@@ -41,6 +41,8 @@ myAudio.append(audio: *anotherAudioPath*) {
   // do stuff when appending is complete
 }
 ```
+The result audio automatically replace `myAudio` previous audio.
+
 
 ### Removing an interval
 
