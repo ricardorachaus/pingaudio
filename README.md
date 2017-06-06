@@ -79,6 +79,6 @@ Removing outside an interval (i.e. cropping the audio outside the specified inte
 ```
 
 ### Credits
-Miguel Nery
+[Miguel Nery](https://github.com/MiguelNery)
 
-Ricardo Rachaus
+[Ricardo Rachaus](https://github.com/ricardorachaus)
