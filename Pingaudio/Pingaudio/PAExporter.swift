@@ -8,15 +8,8 @@
 
 import AVFoundation
 
-class PAExporter: PAExporterDataSource, PAExporterDelegate {
-    var resultAudio: PAAudio?
-    var didExport: Bool {
-        get {
-            return resultAudio != nil
-        }
-    }
-    
-    var exportStatus: String
+class PAExporter: PAExporterDelegate {
+    fileprivate var exportStatus: String
     
     public init() {
         exportStatus = ""

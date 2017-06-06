@@ -34,5 +34,6 @@ protocol PAAudioDelegate {
      - Parameter completion: a block to be executed when removing is complete, wheter it succeeds or fail.
      */
     func remove(outsideIntervalFrom begin: CMTime, to end: CMTime, completion: @escaping(_ output: PAAudio?) -> Void)
+    
     func split(intervalsOfDuration duration: CMTime) -> [PAAudio]
 }

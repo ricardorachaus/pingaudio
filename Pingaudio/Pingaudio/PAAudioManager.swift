@@ -9,16 +9,6 @@
 import AVFoundation
 
 public class PAAudioManager: PAAudioManagerDelegate {
-    var resultAudio: PAAudio? {
-        get {
-            if exporter.didExport {
-                return exporter.resultAudio
-            }
-            else {
-                return nil
-            }
-        }
-    }
     var exporter: PAExporter!
     
     init() {

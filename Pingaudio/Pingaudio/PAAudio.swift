@@ -11,22 +11,7 @@ import AVFoundation
 public class PAAudio: PAAudioDataSource, PAAudioDelegate {
     var delegate: PAAudioDelegate?
     public var path: URL
-    var duration: CMTime
-    fileprivate var asset: AVAsset?
     fileprivate var exporter: PAExporter?
-    fileprivate var audio: PAAudio? {
-        get {
-            let resultAudio = exporter?.resultAudio
-            if (exporter?.didExport)! {
-                self.path = (resultAudio?.path)!
-                self.asset = AVAsset(url: self.path)
-                self.duration = (asset?.duration)!
-                return resultAudio
-            } else {
-                return nil
-            }
-        }
-    }
     
     /**
      Default initializer
@@ -34,8 +19,6 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
      */
     public init(path: URL) {
         self.path = path
-        asset = AVAsset(url: self.path)
-        duration = (asset?.duration)!
         exporter = PAExporter()
     }
     
@@ -80,16 +63,6 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
                 completion(false)
             }
         }
-    }
-    
-    func setAudio() {
-        let result = exporter?.resultAudio?.path
-        var count = 0
-        while result == nil {
-            print("hue \(count)")
-            count += 1
-        }
-        path = (exporter?.resultAudio?.path)!
     }
     
     public func insert(at: CMTime) -> Bool {
@@ -159,11 +132,6 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
     
 
     public func split(intervalsOfDuration duration: CMTime) -> [PAAudio] {
-        if self.duration <= duration {
-            return [self]
-        } else {
-            
-        }
         return [PAAudio(path: path)]
     }
     
