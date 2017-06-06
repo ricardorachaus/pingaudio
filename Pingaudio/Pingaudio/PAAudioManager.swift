@@ -25,7 +25,7 @@ public class PAAudioManager: PAAudioManagerDelegate {
         exporter = PAExporter()
     }
     
-    public func merge(audios: [PAAudio]) -> URL? {
+    public func merge(audios: [PAAudio], completion: @escaping (_ output: URL?) -> Void) {
         let composition = AVMutableComposition()
         var time = kCMTimeZero
         
@@ -34,7 +34,13 @@ public class PAAudioManager: PAAudioManagerDelegate {
             PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: time)
             time = CMTimeAdd(time, asset.duration)
         }
-        return exporter.export(composition: composition)
+        exporter.export(composition: composition) { (output: URL?) -> Void in
+            if let result = output {
+                completion(result)
+            } else {
+                completion(nil)
+            }
+        }
     }
     
     static func add(asset: AVAsset, ofType type: String, to composition: AVMutableComposition, at time: CMTime) {
@@ -46,5 +52,4 @@ public class PAAudioManager: PAAudioManagerDelegate {
             print("falha ao adicionar track a composition")
         }
     }
-
 }

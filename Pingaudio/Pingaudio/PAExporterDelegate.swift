@@ -9,5 +9,5 @@
 import AVFoundation
 
 protocol PAExporterDelegate {
-        func export(composition: AVMutableComposition) -> URL?
+    func export(composition: AVMutableComposition, completion: @escaping (_ output: URL?) -> Void)
 }

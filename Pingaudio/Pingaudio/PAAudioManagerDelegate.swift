@@ -9,5 +9,5 @@
 import AVFoundation
 
 protocol PAAudioManagerDelegate {
-    func merge(audios: [PAAudio]) -> URL?
+    func merge(audios: [PAAudio], completion: @escaping (_ output: URL?) -> Void)
 }

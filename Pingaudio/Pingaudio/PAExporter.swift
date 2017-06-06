@@ -22,19 +22,22 @@ class PAExporter: PAExporterDataSource, PAExporterDelegate {
         exportStatus = ""
     }
     
-    func export(composition: AVMutableComposition) -> URL? {
+    func export(composition: AVMutableComposition, completion: @escaping (_ output: URL?) -> Void) {
         let fileManager = FileManager()
         let outputPath = fileManager.temporaryDirectory.appendingPathComponent("\(Date().timeIntervalSince1970).m4a")
-        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return nil}
+        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return }
         exporter.outputURL = outputPath
         exporter.outputFileType = AVFileTypeAppleM4A
         exporter.shouldOptimizeForNetworkUse = true
         exporter.exportAsynchronously() {
+            self.updateStatus(exporterStatus: exporter.status)
             if let error = exporter.error {
                 print(error.localizedDescription)
+                completion(nil)
+            } else {
+                completion(outputPath)
             }
         }
-        return outputPath
     }
     
     func export(composition: AVMutableComposition, in time: CMTimeRange, completion: @escaping (_ output: URL?) -> Void) {

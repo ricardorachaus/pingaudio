@@ -44,7 +44,7 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         - Parameter tempPath: item to be moved.
      
      */
-    func moveToDocuments(tempPath: URL) {
+    func moveToDocuments(tempPath: URL) -> Bool {
         let fileManager = FileManager()
         let savePath = self.path
         if fileManager.fileExists(atPath: tempPath.path) && fileManager.fileExists(atPath: savePath.path) {
@@ -53,30 +53,35 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
                 try fileManager.removeItem(at: savePath)
             } catch let error {
                 print(error.localizedDescription)
-                return
+                return false
             }
             
             // now move the new audio to the PAAudio path
             do {
                 try fileManager.moveItem(at: tempPath, to: savePath)
+                return true
             } catch let error {
                 print(error.localizedDescription)
+                return false
             }
         }
+        return false
     }
     
     /**
      Append audio file in `path` at the end of current audio, making a new audio from it
      - Parameter path: path to some audio file
      */
-    public func append(audio path: URL) {
+    public func append(audio path: URL, completion: @escaping (_ completed: Bool) -> Void) {
         let audioManager = PAAudioManager()
         
-        let outputPath = audioManager.merge(audios: [self, PAAudio(path: path)])
-        if let tempPath = outputPath {
-            moveToDocuments(tempPath: tempPath)
-        } else {
-            print("Failed to append file. AVAssetExportSession is nil")
+        audioManager.merge(audios: [self, PAAudio(path: path)]) { (output: URL?) -> Void in
+            if let tempPath = output {
+                completion(self.moveToDocuments(tempPath: tempPath))
+            } else {
+                print("Failed to append file. AVAssetExportSession is nil")
+                completion(false)
+            }
         }
     }
     
@@ -94,50 +99,49 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         return true
     }
     
-    public func remove(intervalFrom begin: CMTime, to end: CMTime) -> PAAudio? {
+    public func remove(intervalFrom begin: CMTime, to end: CMTime, completion: @escaping (_ output: PAAudio?) -> Void) {
         let exporter = PAExporter()
-                let asset = AVAsset(url: path)
+        let asset = AVAsset(url: path)
         let composition = AVMutableComposition()
         PAAudioManager.add(asset: asset, ofType: AVMediaTypeAudio, to: composition, at: kCMTimeZero)
         
         let  firstTimeRange = CMTimeRange(start: kCMTimeZero, end: begin)
-        var firstResultPath: URL?
+        var firstPartPath: URL?
         exporter.export(composition: composition, in: firstTimeRange) { (resultPath: URL?) -> Void in
             if let result = resultPath {
-                firstResultPath = result
+                firstPartPath = result
+                
+                let secondTimeRange = CMTimeRange(start: end, end: asset.duration)
+                var secondPartPath: URL?
+                exporter.export(composition: composition, in: secondTimeRange) { (output: URL?) -> Void in
+                    if let result = output {
+                        secondPartPath = result
+                        
+                        guard let firstPart = firstPartPath, let secondPart = secondPartPath else {
+                            print("failed to remove interval: Invalid parts")
+                            return
+                        }
+                        
+                        let firstAudio = PAAudio(path: firstPart)
+                        let secondAudio = PAAudio(path: secondPart)
+                        
+                        let audioManager = PAAudioManager()
+                        audioManager.merge(audios: [firstAudio, secondAudio]) { (output: URL?) -> Void in
+                            if let result = output {
+                                completion(PAAudio(path: result))
+                            } else {
+                                completion(nil)
+                            }
+                        }
+                    } else {
+                        secondPartPath = nil
+                        print("failed to export second part of audio")
+                    }
+                }
             } else {
-                firstResultPath = nil
+                firstPartPath = nil
                 print("failed to export first part of audio")
             }
-        }
-        
-        let secondTimeRange = CMTimeRange(start: end, end: asset.duration)
-        var secondResultPath: URL?
-        exporter.export(composition: composition, in: secondTimeRange) { (output: URL?) -> Void in
-            if let result = output {
-                secondResultPath = result
-            } else {
-                secondResultPath = nil
-                print("failed to export second part of audio")
-            }
-        }
-        
-        guard let firstResult = firstResultPath, let secondResult = secondResultPath else {
-            print("failed to remove interval: E01")
-            return nil
-        }
-        
-        let firstAudio = PAAudio(path: firstResult)
-        let secondAudio = PAAudio(path: secondResult)
-        
-        let audioManager = PAAudioManager()
-        let result = audioManager.merge(audios: [firstAudio, secondAudio])
-        
-        if let resultPath = result {
-            return PAAudio(path: resultPath)
-        } else {
-            print("failed to remove interval: E02")
-            return nil
         }
     }
     
