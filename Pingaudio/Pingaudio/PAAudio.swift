@@ -68,10 +68,7 @@ public class PAAudio: PAAudioDataSource, PAAudioDelegate {
         return false
     }
     
-    /**
-     Append audio file in `path` at the end of current audio, making a new audio from it
-     - Parameter path: path to some audio file
-     */
+    
     public func append(audio path: URL, completion: @escaping (_ completed: Bool) -> Void) {
         let audioManager = PAAudioManager()
         
