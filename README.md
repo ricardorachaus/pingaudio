@@ -5,8 +5,8 @@ Pingaudio is an audio handling framework.
 - [Installation](#installation)
 - [Usage](#usage)
     - [Appending an audio](#appending-an-audio)
-	  - [Removing an interval](#removing-an-interval)
-	  - [Removing outside an interval](#removing-outside-an-interval)
+    - [Removing an interval](#removing-an-interval)
+    - [Removing outside an interval](#removing-outside-an-interval)
 - [Credits](#credits)
 - [License](#license)
 
