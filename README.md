@@ -1,3 +1,5 @@
+![alt text](https://github.com/ricardorachaus/pingaudio/blob/master/Pingaudio/v3.png "Logo")
+
 Pingaudio is an audio handling framework.
 
 - [Features](#features)
@@ -11,10 +13,20 @@ Pingaudio is an audio handling framework.
 - [License](#license)
 
 
+## Features
+
+- [x] Append audios
+- [x] Manipulate audio intervals
+- [x] Merge multiple audios together
+- [x] [Complete Documentation](https://github.com/ricardorachaus/pingaudio)
+
+
 ## Requirements
 - Xcode 8.1+
 - Swift 3.0+
 
+## Installation
+coming soon..
 
 ## Usage
 
