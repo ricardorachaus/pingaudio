@@ -82,3 +82,7 @@ Removing outside an interval (i.e. cropping the audio outside the specified inte
 [Miguel Nery](https://github.com/MiguelNery)
 
 [Ricardo Rachaus](https://github.com/ricardorachaus)
+
+
+### License
+Pingaudio is released under the MIT license.
