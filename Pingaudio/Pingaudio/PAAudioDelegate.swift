@@ -16,9 +16,6 @@ protocol PAAudioDelegate {
      */
     func append(audio path: URL, completion: @escaping (_ output: Bool) -> Void)
     
-    func insert(at: CMTime) -> Bool
-    
-    
     /**
      Remove the interval defined by `begin` and `end` from the audio.
      - Parameter begin: begin of the interval to be removed.
@@ -34,6 +31,4 @@ protocol PAAudioDelegate {
      - Parameter completion: a block to be executed when removing is complete, wheter it succeeds or fail.
      */
     func remove(outsideIntervalFrom begin: CMTime, to end: CMTime, completion: @escaping(_ output: PAAudio?) -> Void)
-    
-    func split(intervalsOfDuration duration: CMTime) -> [PAAudio]
 }
